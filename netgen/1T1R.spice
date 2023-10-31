@@ -1,0 +1,25 @@
+** sch_path: /home/jthater/Project/xschem/1T1R.sch
+.subckt 1T1R SL VSS WL BL
+*.PININFO SL:B VSS:B WL:B BL:B
+XR1 BL net1 sky130_fd_pr_reram__reram_cell Tfilament_0=3.8e-9
+XM1 net1 WL SL VSS sky130_fd_pr__nfet_g5v0d10v5 L=0.5 W=7 nf=1 m=1
+.ends
+**** begin user architecture code
+
+.subckt sky130_fd_pr_reram__reram_cell TE BE Tfilament_0=3.3e-9 area_ox=0.1024e-12
+N1 TE BE nFilament sky130_fd_pr_reram__reram_model
+.ic v(nFilament)={Tfilament_0*1.0e9}
+.ends sky130_fd_pr_reram__reram_cell
+
+.model sky130_fd_pr_reram__reram_model sky130_fd_pr_reram__reram_module  area_ox = 0.1024e-12  Tox =
++ 5.0  Tfilament_max = 4.9  Tfilament_min = 3.3  Eact_generation = 1.501  Eact_recombination  = 1.500
++  I_k1  = 6.140e-5  Tfilament_ref = 4.7249  V_ref = 0.430  velocity_k1 = 150  gamma_k0  = 16.5  gamma_k1
++  = -1.25  Temperature_0 = 300  C_thermal = 3.1825e-16  tau_thermal = 0.23e-9  t_step  = 1.0e-9
++  smoothing = 1e-7  Kclip = 200
+
+.control
+pre_osdi /usr/local/share/pdk/sky130B/libs.tech/ngspice/sky130_fd_pr_reram__reram_module.osdi
+.endc
+
+**** end user architecture code
+.end
